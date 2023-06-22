@@ -1,5 +1,7 @@
 package at.gepardec.rest;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -7,27 +9,35 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.micrometer.core.instrument.MeterRegistry;
+import io.quarkus.runtime.StartupEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Path("/test-alert")
+@ApplicationScoped
 public class TestAlert {
 
-
-    AtomicInteger testalertactive;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogErrorGeneratorResource.class);
+    AtomicInteger testAlertActive;
 
     TestAlert(MeterRegistry registry) {
-        this.testalertactive = new AtomicInteger(0);
-        registry.gauge("test.alert", testalertactive);
+        this.testAlertActive = new AtomicInteger(0);
+        registry.gauge("demo.microservice.test.alert.active", testAlertActive);
+    }
+
+    void onStart(@Observes StartupEvent ev) {
+        LOGGER.info("Starting TestAlert endpoint");
     }
 
     @GET
     @Path("/on")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response turnOnAlert() {
+    public Response turnAlertOn() {
 
-        testalertactive.set(1);
+        testAlertActive.set(1);
         return Response
                 .status(200)
                 .entity("Alert turned on!")
@@ -37,9 +47,9 @@ public class TestAlert {
     @GET
     @Path("/off")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response turnOffAlert() {
+    public Response turnAlertOff() {
 
-        testalertactive.set(0);
+        testAlertActive.set(0);
         return Response
                 .status(200)
                 .entity("Alert turned off!")
