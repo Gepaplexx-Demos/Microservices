@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.quarkus.runtime.StartupEvent;
 import org.slf4j.Logger;
@@ -25,7 +26,9 @@ public class TestAlert {
 
     TestAlert(MeterRegistry registry) {
         this.testAlertActive = new AtomicInteger(0);
-        registry.gauge("demo.microservice.test.alert.active", testAlertActive);
+        Gauge.builder("demo.microservice.test.alert.active", testAlertActive, AtomicInteger::doubleValue)
+                .description("This is a custom metric that is toggled on and off via the /test-alert/ endpoint.")
+                .register(registry);
     }
 
     void onStart(@Observes StartupEvent ev) {
