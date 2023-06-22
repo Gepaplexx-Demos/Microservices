@@ -27,7 +27,7 @@ public class TestAlert {
     TestAlert(MeterRegistry registry) {
         this.testAlertActive = new AtomicInteger(0);
         Gauge.builder("demo.microservice.test.alert.active", testAlertActive, AtomicInteger::doubleValue)
-                .description("This is a custom metric that is toggled on and off via the /test-alert/ endpoint.")
+                .description("This is a custom metric that is toggled on and off via the /test-alert/on or /test-alert/on endpoint.")
                 .register(registry);
     }
 
