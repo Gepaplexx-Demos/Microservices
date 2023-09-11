@@ -1,5 +1,3 @@
-## Microservice for the purpose of simulating and testing health-endpoints, logging and LoadTesting. Furthermore simulating and monitoring traffic between several microservices.
+Freitag Magic von 13:00 bis 17:00 anstatt länger?
 
-
-test
-test
+Wer geht Bier/Spriter einkaufen? Welche Decks wollen wir spielen? - Hab viele von meinen wegen privater Zockrunden aktuell zuhause.
