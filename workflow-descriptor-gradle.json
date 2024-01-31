@@ -2,16 +2,16 @@
   "build": {
     "language": {
       "name": "java",
-      "version": "openjdk-11"
+      "version": "jdk11-alpine"
     },
     "type": {
-      "name": "maven",
-      "version": "3.8.6",
+      "name": "gradle",
+      "version": "8.5",
       "configuration": {
-        "args": "clean install",
-        "config": "pom.xml",
+        "args": "test quarkusBuild",
+        "config": "",
         "config-path": "",
-        "options": ""
+        "options": "-Dquarkus.package.type=uber-jar"
       }
     },
     "static-code-analysis": {
@@ -35,7 +35,7 @@
   "image": {
     "registry": "ghcr.io",
     "repository": "gepaplexx",
-    "containerfile": "ContainerfileMaven"
+    "containerfile": "ContainerfileGradle"
   },
   "vulnerability-scan": {
     "active": "true",
