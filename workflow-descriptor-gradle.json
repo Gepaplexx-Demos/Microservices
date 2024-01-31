@@ -8,10 +8,10 @@
       "name": "gradle",
       "version": "8.5",
       "configuration": {
-        "args": "test quarkusBuild",
+        "args": "build -Dquarkus.package.type=uber-jar",
         "config": "",
         "config-path": "",
-        "options": "-Dquarkus.package.type=uber-jar"
+        "options": ""
       }
     },
     "static-code-analysis": {
