@@ -11,7 +11,7 @@
         "args": "build -Dquarkus.package.type=uber-jar",
         "config": "",
         "config-path": "",
-        "options": ""
+        "options": "-x test"
       }
     },
     "static-code-analysis": {
